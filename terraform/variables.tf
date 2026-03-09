@@ -27,3 +27,21 @@ variable "private_subnet_cidr" {
   type        = string
   default     = "10.0.2.0/24"
 }
+
+variable "ec2_instance_type" {
+  default = "t3.micro"
+}
+
+variable "asg_min_size" {
+  default = 2
+}
+
+variable "asg_max_size" {
+  default = 4
+}
+
+variable "db_password" {
+  description = "Production DB Password"
+  type        = string
+  sensitive   = true
+}
