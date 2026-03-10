@@ -39,3 +39,15 @@ module "compute" {
   max_size             = var.asg_max_size
   desired_capacity     = var.asg_min_size
 }
+
+module "database" {
+  source          = "./modules/database"
+  project_name    = var.project_name
+  vpc_id          = module.networking.vpc_id
+  subnet_ids      = [module.networking.private_subnet_id]
+  db_password     = var.db_password
+  app_sg_id       = module.compute.web_sg_id
+  kms_key_arn     = module.kms.key_arn
+  multi_az        = false
+  instance_class  = "db.t3.micro"
+}
