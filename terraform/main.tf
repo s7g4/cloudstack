@@ -51,3 +51,15 @@ module "database" {
   multi_az        = false
   instance_class  = "db.t3.micro"
 }
+
+module "observability" {
+  source = "./modules/observability"
+
+  project_name     = var.project_name
+  alert_email      = var.alert_email
+  asg_name         = module.compute.asg_name
+  alb_dns_name     = module.compute.alb_dns_name
+  alb_arn_suffix   = module.compute.alb_arn_suffix
+  db_instance_id   = module.database.db_instance_id
+  cache_cluster_id = "placeholder-added-in-1.4"
+}
