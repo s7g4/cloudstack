@@ -63,3 +63,11 @@ module "observability" {
   db_instance_id   = module.database.db_instance_id
   cache_cluster_id = "placeholder-added-in-1.4"
 }
+
+module "secrets" {
+  source = "./modules/secrets"
+
+  project_name = var.project_name
+  kms_key_arn  = module.kms.key_arn
+  db_password  = var.db_password
+}
