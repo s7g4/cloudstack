@@ -71,3 +71,9 @@ module "secrets" {
   kms_key_arn  = module.kms.key_arn
   db_password  = var.db_password
 }
+
+module "waf" {
+  source       = "./modules/waf"
+  project_name = var.project_name
+  alb_arn      = module.compute.alb_arn
+}
